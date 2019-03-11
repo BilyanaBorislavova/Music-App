@@ -5,9 +5,10 @@ const artistSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.String,
         required: true,
         unique: true,
+        minlength: 3,
         maxlength: 50 },
-    picture: {type: mongoose.Schema.Types.String, required: true},
-    albums: [{type: mongoose.Schema.Types.ObjectId, ref: 'Album'}]
+    photo: {type: mongoose.Schema.Types.String, required: true},
+    songs: [{type: mongoose.Schema.Types.ObjectId, ref: 'Song'}]
 })
 
 const Artist = mongoose.model('Artist', artistSchema);

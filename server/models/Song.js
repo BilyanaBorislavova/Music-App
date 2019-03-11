@@ -4,7 +4,7 @@ const Album = require('./Album');
 const songSchema = new mongoose.Schema({
     name: {type: mongoose.Schema.Types.String, required: true},
     lyrics: {type: mongoose.Schema.Types.String}, 
-    album: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Album'}
+    artist: {type: mongoose.Schema.Types.ObjectId, ref: 'Artist'}
 });
 
 const model = mongoose.model('Song', songSchema);

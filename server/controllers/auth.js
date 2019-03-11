@@ -32,7 +32,7 @@ module.exports = {
         profilePicture
       }).then((user) => {
         res.status(201)
-          .json({ message: 'User created!', userId: user._id, username: user.username });
+          .json({ message: 'User created!', userId: user._id, username: user.username, profilePicture: user.profilePicture, fullName:user.fullName, email: user.email });
       })
       .catch((error) => {
         if (!error.statusCode) {
@@ -73,7 +73,10 @@ module.exports = {
              token, 
              userId: user._id.toString(),
              username: user.username,
-             isAdmin: user.roles.indexOf('Admin') != -1
+             isAdmin: user.roles.indexOf('Admin') != -1,
+             profilePicture: user.profilePicture,
+             fullName: user.fullName,
+             email: user.email
            });
       })
       .catch(error => {
@@ -83,5 +86,22 @@ module.exports = {
 
         next(error);
       })
+  },
+
+  getProfile: (req, res, next) => {
+    const { username } = req.body;
+    
+    User.findOne({ username })
+        .then(user => {
+          res
+            .status(200)
+            .json({ message: 'Loaded user', user });
+        })
+        .catch((error) => {
+          if (!error.statusCode) {
+            error.statusCode = 500;
+          }
+          next(error);
+        });
   }
 };
