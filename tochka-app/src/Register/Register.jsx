@@ -9,7 +9,8 @@ export default class Register extends Component {
             username: null,
             password: null,
             email: null,
-            fullName: null
+            fullName: null,
+            profilePicture: null
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -24,6 +25,11 @@ export default class Register extends Component {
     }
 
     render() {
+        console.log(sessionStorage.getItem('username'))
+        if(sessionStorage.getItem('username') !== null && sessionStorage.getItem('username') !== 'undefined'){
+            window.location.href = 'http://localhost:3000';
+            return;
+        }
         return (
             <form className="register-form" onSubmit={(event) => {
                 event.preventDefault();
@@ -50,7 +56,7 @@ export default class Register extends Component {
 
                     <label htmlFor="profilePicture">Avatar</label> <br />
                     <input type="text" name="profilePicture" placeholder="Choose a profile picture" onChange={this.handleChange} required></input> <br />
-                    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                    <p>By creating an account you agree to our <a href="https://i.imgur.com/Q8ifRGK.jpg">Terms & Privacy</a>.</p>
                     <button type="submit" className="registerbtn">Register</button>
                 </div>
                 <div class="container signin">
