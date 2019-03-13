@@ -25,6 +25,7 @@ app.use('/view', viewRoutes);
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const message = error.message;
+  res.locals.user = req.user;
   res.status(status).json({ message: message });
   next();
 });

@@ -29,8 +29,9 @@ module.exports = {
         username,
         salt,
         fullName,
-        profilePicture
+        profilePicture,
       }).then((user) => {
+        console.log(user)
         res.status(201)
           .json({ message: 'User created!', userId: user._id, username: user.username, profilePicture: user.profilePicture, fullName:user.fullName, email: user.email });
       })
@@ -76,7 +77,7 @@ module.exports = {
              isAdmin: user.roles.indexOf('Admin') != -1,
              profilePicture: user.profilePicture,
              fullName: user.fullName,
-             email: user.email
+             email: user.email,
            });
       })
       .catch(error => {
@@ -89,19 +90,6 @@ module.exports = {
   },
 
   getProfile: (req, res, next) => {
-    const { username } = req.body;
     
-    User.findOne({ username })
-        .then(user => {
-          res
-            .status(200)
-            .json({ message: 'Loaded user', user });
-        })
-        .catch((error) => {
-          if (!error.statusCode) {
-            error.statusCode = 500;
-          }
-          next(error);
-        });
   }
 };

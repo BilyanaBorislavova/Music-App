@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     profilePicture: {type: mongoose.Schema.Types.String, default: 'https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg'},
     salt: { type: mongoose.Schema.Types.String, required: true },
     roles: [{ type: mongoose.Schema.Types.String }],
+    myPlaylist: [{type: mongoose.Schema.Types.ObjectId, ref: 'Song'}]
 });
 
 userSchema.method({
