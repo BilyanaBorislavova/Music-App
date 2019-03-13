@@ -41,6 +41,9 @@ export default class UserNavBar extends Component {
                               <Link to="/viewArtists">View Artists</Link>
                           </li>
                           <li>
+                              <Link to="/myPlaylist">My Playlist</Link>
+                          </li>
+                          <li>
                               <Link to="/logout" onClick={this.logout.bind(this)}>Logout</Link>
                           </li>
                           </div>

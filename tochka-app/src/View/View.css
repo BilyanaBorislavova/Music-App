@@ -60,7 +60,7 @@
     
     /* Set a grey background color and center the text of the "sign in" section */
 
-    h1, p {
+    h1, p, h3 {
         text-align: center
     }
 
@@ -72,4 +72,16 @@
   margin-right: auto;
   width: 50%;
   width: 270px;
+      }
+
+      .anotherSpecialBtn{
+        background-color: lightskyblue;
+        color: white;
+        padding: 16px 20px;
+        margin: 0 0 0 625px;
+        border: none;
+        cursor: pointer;
+        width: 25%;
+        opacity: 0.9;
+        border-radius: 4px
       }

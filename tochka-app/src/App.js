@@ -9,7 +9,9 @@ import Profile from './Profile/Profile';
 import Artist from './Create/Artist';
 import Song from './Create/Song';
 import ViewArtists from './View/ViewArtists';
+import BanUsers from './View/BanUsers';
 import ViewSongs from './View/ViewSongs';
+import MyPlaylist from './View/MyPlaylist';
 import './App.css';
 
 let container;
@@ -26,7 +28,9 @@ class App extends Component {
       profilePicture: '',
       artists: [],
       fullname: '',
-      email: ''
+      email: '',
+      myPlaylist: [],
+      allUsers: []
     }
   }
 
@@ -51,16 +55,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8000/view/viewArtists')
-      .then(res => res.json())
-      .then((data) => {
-        this.setState({
-          artists: [...this.state.artists, data.artists]
-        })
-      })
-  }
-
-  componentWillMount() {
     if (sessionStorage.getItem('username') && sessionStorage.getItem('token')) {
       this.setState({
         user: sessionStorage.getItem('username'),
@@ -75,7 +69,39 @@ class App extends Component {
         isAdmin: true
       })
     }
+
+    fetch('http://localhost:8000/view/viewArtists')
+      .then(res => res.json())
+      .then((data) => {
+        this.setState({
+          artists: [...this.state.artists, data.artists]
+        })
+      })
+
+      fetch(`http://localhost:8000/view/myPlaylist/${sessionStorage.getItem('userId')}`)
+          .then(res => res.json())
+          .then(data => {
+            console.log(data.songs)
+            this.setState({
+              myPlaylist: data.songs
+            })
+          })
+          .catch(err => {
+            console.log(err)
+          })
+
+          fetch('http://localhost:8000/view/getUsers')
+              .then(res => res.json())
+              .then(data => {
+                this.setState({
+                  allUsers: data.users
+                })
+              })
+              .catch(err => {
+                console.log(err);
+              })
   }
+
 
   loginUser(user) {
     fetch('http://localhost:8000/auth/login', {
@@ -172,6 +198,8 @@ class App extends Component {
               artists={this.state.artists}
               getSongs={this.state.artists}
               />}></Route>
+              <Route path="/myPlaylist" exact render={() => <MyPlaylist myPlaylist={this.state.myPlaylist}/>}></Route>
+              <Route path="/banUsers" exact render={() => <BanUsers allUsers={this.state.allUsers}/>}></Route>
             </Switch>
           </div>
         </Router>

@@ -5,7 +5,7 @@ export default class Home extends Component {
         return (
             <div>
                 <h1>Music App</h1> <br/> <hr/>
-                <img src="https://cdn.pixabay.com/photo/2016/06/01/09/21/music-1428660_960_720.jpg" className="center"></img>
+                <img src="https://www.pngkey.com/png/full/147-1474031_musical-note-sheet-music-staff-musical-notation-flowing.png" className="center"></img>
             </div>
         );
     }

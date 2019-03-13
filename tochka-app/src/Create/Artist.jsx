@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Style.css';
 
+let container;
 export default class Artist extends Component {
     constructor(props){
         super(props)
