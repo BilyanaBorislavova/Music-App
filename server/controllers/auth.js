@@ -20,12 +20,10 @@ module.exports = {
   register: (req, res, next) => {
 
     if (validateUser(req, res)) {
-      const {  username, password,email, fullName, profilePicture, repeatedPassword } = req.body;
+      const {  username, password,email, fullName, profilePicture } = req.body;
       const salt = encryption.generateSalt();
       const hashedPass = encryption.generateHashedPassword(salt, password);
-      if(password !== repeatedPassword) {
-        console.log('Passwords do not match!!')
-      }
+
       User.create({ 
         email,
         hashedPass,
@@ -41,6 +39,7 @@ module.exports = {
       .catch((error) => {
         if (!error.statusCode) {
           error.statusCode = 500;
+          error.message = 'An error occurred!'
         }
 
         next(error);
