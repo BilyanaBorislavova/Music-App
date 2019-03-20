@@ -44,7 +44,6 @@ export default class AdminNavBar extends Component {
                               <li>
                                   <Link to="/createSong">Add Song</Link>
                               </li>
-                              
                               <li>
                                   <Link to="/banUsers">Ban Users</Link>
                               </li>

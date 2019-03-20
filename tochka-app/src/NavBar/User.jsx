@@ -3,13 +3,6 @@ import {Link} from 'react-router-dom';
 import './NavBar.css';
 
 export default class UserNavBar extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            user: null
-        }
-    }
-
     logout(event) { 
         event.preventDefault();
            sessionStorage.removeItem('token');
@@ -19,9 +12,6 @@ export default class UserNavBar extends Component {
            sessionStorage.removeItem('userId');
            sessionStorage.removeItem('email')
            sessionStorage.removeItem('fullname')
-           this.setState({
-               user: null
-           })
            window.location.href = 'http://localhost:3000';
       }
 

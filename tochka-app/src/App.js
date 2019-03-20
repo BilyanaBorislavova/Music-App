@@ -10,7 +10,6 @@ import Artist from './Create/Artist';
 import Song from './Create/Song';
 import ViewArtists from './View/ViewArtists';
 import BanUsers from './View/BanUsers';
-import ViewSongs from './View/ViewSongs';
 import MyPlaylist from './View/MyPlaylist';
 import './App.css';
 
@@ -27,6 +26,7 @@ class App extends Component {
       isAdmin: false,
       profilePicture: '',
       artists: [],
+      username: '',
       fullname: '',
       email: '',
       myPlaylist: [],
@@ -43,6 +43,7 @@ class App extends Component {
       body: JSON.stringify(user)
     }).then(res => res.json())
       .then(data => {
+        console.log(data.errors)
         if (data.errors) {
           data.errors.forEach(err => {
             container.error(<strong className="notice error">{err}</strong>)
@@ -55,20 +56,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-    if (sessionStorage.getItem('username') && sessionStorage.getItem('token')) {
-      this.setState({
-        user: sessionStorage.getItem('username'),
-        profilePicture: sessionStorage.getItem('profilePicture'),
-        fullname: sessionStorage.getItem('fullname'),
-        email: sessionStorage.getItem('email')
-      })
-    }
+    if (sessionStorage.getItem('userId') !== "undefined" && sessionStorage.getItem('userId')) {
+  
+    fetch(`http://localhost:8000/auth/profile/${sessionStorage.getItem('userId')}`)
+        .then(res  => res.json())
+        .then(data => {
 
-    if (sessionStorage.getItem('isAdmin') === true) {
-      this.setState({
-        isAdmin: true
-      })
-    }
+            this.setState({
+              profilePicture: data.user.profilePicture,
+              email: data.user.email,
+              fullname: data.user.fullName,
+              user: data.user.username
+            })
+        })
 
     fetch('http://localhost:8000/view/viewArtists')
       .then(res => res.json())
@@ -101,7 +101,8 @@ class App extends Component {
                 console.log(err);
               })
   }
-
+}
+  
 
   loginUser(user) {
     fetch('http://localhost:8000/auth/login', {
@@ -121,7 +122,7 @@ class App extends Component {
           })
           window.location.href = port;
           // console.log(data)
-          //container.success(<strong className="notice success">User logged in successfully!</strong>)
+          container.success(<strong className="notice success">User logged in successfully!</strong>)
           sessionStorage.setItem('isAdmin', data.isAdmin);
           sessionStorage.setItem('userId', data.userId);
           sessionStorage.setItem('username', data.username);
