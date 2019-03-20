@@ -20,9 +20,12 @@ module.exports = {
   register: (req, res, next) => {
 
     if (validateUser(req, res)) {
-      const {  username, password,email, fullName, profilePicture } = req.body;
+      const {  username, password,email, fullName, profilePicture, repeatedPassword } = req.body;
       const salt = encryption.generateSalt();
       const hashedPass = encryption.generateHashedPassword(salt, password);
+      if(password !== repeatedPassword) {
+        console.log('Passwords do not match!!')
+      }
       User.create({ 
         email,
         hashedPass,
@@ -52,6 +55,7 @@ module.exports = {
         if (!user) {
           const error = new Error('A user with this username could not be found');
           error.statusCode = 401;
+          console.log(error)
           throw error;
         }
 
@@ -90,6 +94,16 @@ module.exports = {
   },
 
   getProfile: (req, res, next) => {
-    
+    const {userId} = req.params;
+
+    User.findById(userId)
+        .then(user => {
+          res.status(200)
+            .json({message: `Got user with id ${userId}`, user})
+        })
+        .catch(err => {
+          console.log(err);
+          next(err);
+        })
   }
 };

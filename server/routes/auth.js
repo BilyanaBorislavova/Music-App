@@ -28,6 +28,6 @@ router.post('/login',
   ]
 , authController.login);
 router.post('/register', authController.register);
-router.get('/profile',  authController.getProfile);
+router.get('/profile/:userId',  authController.getProfile);
 
 module.exports = router;
