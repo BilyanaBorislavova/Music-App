@@ -45,9 +45,6 @@ export default class Register extends Component {
                     <label htmlFor="password">Password</label> <br />
                     <input type="password" name="password" placeholder="Enter your password" onChange={this.handleChange} required></input> <br />
 
-                    <label htmlFor="repeatedPassword">Repeat Password</label> <br />
-                    <input type="password" name="repeatedPassword" placeholder="Repeat password" required></input> <br />
-
                     <label htmlFor="email">Email</label> <br />
                     <input type="email" name="email" placeholder="Enter your email" onChange={this.handleChange} required></input> <br />
 

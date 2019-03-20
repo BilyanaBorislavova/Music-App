@@ -13,12 +13,15 @@ export default class BanUsers extends Component {
         fetch(`http://localhost:8000/view/removeUser/${name}`)
             .then(res => res.json())
             .then(data => {
-                container.success(<strong className="notice success">User successfully deleted!</strong>)
+                setTimeout(function(){
+                    window.location.href = 'http://localhost:3000/banUsers';
+                 }, 1000);
+                container.success(<strong className="notice success">User deleted successfully!</strong>)
             })
             .catch(err => {
                 console.log(err);
             })
-            window.location.href = 'http://localhost:3000/banUsers';
+            
            
         }
 
@@ -29,7 +32,7 @@ export default class BanUsers extends Component {
         }
         return (
              <div>
-                              <ToastContainer
+            <ToastContainer
               ref={ref => container = ref}
               className="toast-top-right"
             />

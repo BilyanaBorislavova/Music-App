@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import { ToastContainer } from "react-toastr";
 
+let container;
 export default class MyPlaylist extends Component {
 
     removeFromPlaylist(event) {
@@ -9,19 +11,28 @@ export default class MyPlaylist extends Component {
         fetch(`http://localhost:8000/view/myPlaylist/${title}/${name}`)
             .then(res =>  res.json())
             .then(data => {
-                console.log(data)
-                window.location.href = 'http://localhost:3000/myPlaylist'
+                container.success(<strong className="notice success">Song removed successfully!</strong>)
+                setTimeout(function(){
+                    window.location.href = 'http://localhost:3000/myPlaylist';
+                 }, 1000);
             })
             .catch(err => {
                 console.log(err)
             })
     }
 
+    
+
     render() {
+        console.log(this.props.myPlaylist.length)
         return (
             <div>
-            
+            <ToastContainer
+              ref={ref => container = ref}
+              className="toast-top-right"
+            />
                 <h1>My Playlist</h1>
+                <hr/>
                 {
                 this.props.myPlaylist.map(song => {
                     return <div>

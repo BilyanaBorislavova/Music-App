@@ -43,15 +43,22 @@ class App extends Component {
       body: JSON.stringify(user)
     }).then(res => res.json())
       .then(data => {
+        console.log(data)
         console.log(data.errors)
-        if (data.errors) {
-          data.errors.forEach(err => {
-            container.error(<strong className="notice error">{err}</strong>)
-          });
+        if (data.message === 'An error occurred!') {
+          setTimeout(function(){
+            window.location.href = 'http://localhost:3000/register';
+          }, 1000);
+            container.error(<strong className="notice error">Please fill in the fields with correct data</strong>)
+          return;
         } else {
-          window.location.href = port;
+          setTimeout(function(){
+            window.location.href = 'http://localhost:3000';
+          }, 1000);
           container.success(<strong className="notice success">User created successfully!</strong>)
         }
+      }).catch(err => {
+        console.log('here')
       })
   }
 
@@ -114,13 +121,19 @@ class App extends Component {
     }).then(res => res.json())
       .then((data) => {
         console.log(data)
-        if (data.errors) {
-
-        } else {
+        if(data.message === 'A user with this username could not be found') {
+          container.error(<strong className="notice error">Please, fill in the fields with correct information</strong>)
+          setTimeout(function(){
+            window.location.href = 'http://localhost:3000/login';
+         }, 1000);
+          return;
+        }
           this.setState({
             user: data.username
           })
-          window.location.href = port;
+           setTimeout(function(){
+                    window.location.href = 'http://localhost:3000';
+                 }, 1000);
           // console.log(data)
           container.success(<strong className="notice success">User logged in successfully!</strong>)
           sessionStorage.setItem('isAdmin', data.isAdmin);
@@ -131,6 +144,8 @@ class App extends Component {
           sessionStorage.setItem('email', data.email)
           sessionStorage.setItem('fullname', data.fullName)
         }
+      ).catch(err => {
+        container.error(<strong className="notice error">An error occurred!</strong>)
       })
   }
 
@@ -144,7 +159,9 @@ class App extends Component {
       body: JSON.stringify(info)
     }).then(res => res.json())
       .then(data => {
-        window.location.href = port;
+        setTimeout(function(){
+          window.location.href = 'http://localhost:3000';
+       }, 1000);
         container.success(<strong className="notice success">Artist created successfully!</strong>)
       }).catch(err => {
         container.error(<strong className="notice error">An error occurred!</strong>)
