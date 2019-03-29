@@ -1,4 +1,4 @@
-const Artist = require('../models/Artist');
+  const Artist = require('../models/Artist');
 const User = require('../models/User');
 const Song = require('../models/Song');
 const ObjectId = require('mongoose').ObjectId;
@@ -48,9 +48,9 @@ module.exports = {
     let user = await User.findById(userId);
     if (user.myPlaylist.indexOf(song) <= -1) {
       user.myPlaylist.push(song);
-      console.log('added');
+      res.status(201).json({message: "Song added to playlist successfully!"})
     } else {
-      console.log('Song already exists');
+      res.status(500).json({message: "Song already exists in the playlist!"})
     }
     user.save();
   },
@@ -79,7 +79,7 @@ module.exports = {
 
     user.myPlaylist.pull(name)
      await user.save();
-      console.log('song removed!!')
+      console.log('Song removed!!')
     
 
     res.status(200)
@@ -108,9 +108,9 @@ module.exports = {
 
      User.findByIdAndRemove(userId)
      .then(data => {
-       console.log(data)
+       res.status(201).json({message: `User ${data.email} removed successfully!`})
      }).catch(err => { 
        console.log(err)
      })
-  },
+  }
 }

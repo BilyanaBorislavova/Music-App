@@ -31,10 +31,11 @@ module.exports = {
         salt,
         fullName,
         profilePicture,
+        roles: ['user']
       }).then((user) => {
         console.log(user)
         res.status(201)
-          .json({ message: 'User created!', userId: user._id, username: user.username, profilePicture: user.profilePicture, fullName:user.fullName, email: user.email });
+          .json({ message: 'User created!', userId: user._id, username: user.username, profilePicture: user.profilePicture, fullName:user.fullName, email: user.email, roles: user.roles });
       })
       .catch((error) => {
         if (!error.statusCode) {
@@ -59,7 +60,7 @@ module.exports = {
         }
 
         if(!user.authenticate(password)) {
-          const error = new Error('A user with this email could not be found');
+          const error = new Error('A user with this password could not be found');
           error.statusCode = 401;
           throw error;
         }

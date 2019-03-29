@@ -9,7 +9,7 @@ module.exports = {
             .then((artist) => {
                 res.status(200)
                     .json({
-                        message: 'Artist created successfully!',
+                        message: `Artist ${artist.name} created successfully!`,
                         artist
                     })
             })
@@ -34,7 +34,7 @@ module.exports = {
 
                 res.status(200)
                     .json({
-                        message: 'Song created successfully!',
+                        message: `Song ${song.name} created successfully!`,
                         name: song.name, 
                         lyrics: song.lyrics,
                         artist: artist._id
@@ -49,5 +49,5 @@ module.exports = {
             })
     },
 
-   
+
 }
