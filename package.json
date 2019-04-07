@@ -1,28 +1,20 @@
 {
-  "name": "my-shit-of-a-project",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "create-react-app": "^2.1.8",
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2",
-    "react-player": "^1.9.3",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.5"
-  },
+  "name": "Express-REST-API",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "1.18.3",
+    "cors": "^2.8.5",
+    "express": "4.16.4",
+    "express-validator": "5.3.1",
+    "jsonwebtoken": "8.4.0",
+    "mongoose": "5.4.7"
+  }
 }
