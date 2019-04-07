@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import {Redirect} from 'react-router-dom';
-import swal from 'sweetalert';
-import AuthenticationService from '../../services/authentication';
+import { Redirect } from "react-router-dom";
+import swal from "sweetalert";
+import AuthenticationService from "../../services/authentication";
 
 export default class ViewSongs extends Component {
   static service = new AuthenticationService();
 
-  constructor(props){
-    super(props) 
+  constructor(props) {
+    super(props);
     this.state = {
       clicked: false
-    }
+    };
   }
 
   async addToPlaylist(event) {
@@ -18,21 +18,24 @@ export default class ViewSongs extends Component {
     const { name, title } = event.target;
     try {
       const song = await ViewSongs.service.addToPlaylist(name, title);
-      swal(song.message);
+      if (song.message === "Song already exists in the playlist!") {
+        swal({ text: song.message, dangerMode: true });
+      } else {
+        swal(song.message);
+      }
       this.setState({
         clicked: true
-      })
-      
+      });
     } catch (err) {
-      swal(err)
+      swal(err);
     }
   }
 
   render() {
-    const {clicked} = this.state;
+    const { clicked } = this.state;
 
-    if(clicked) {
-      return <Redirect to="/"/>
+    if (clicked) {
+      return <Redirect to="/" />;
     }
 
     return (

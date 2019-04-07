@@ -13,6 +13,7 @@ export default class AuthenticationService {
         this.deleteUserUrl = `${this.baseUrl}/view/removeUser/`
         this.getProfileUrl = `${this.baseUrl}/auth/profile/`
         this.getArtistUrl = `${this.baseUrl}/view/viewArtist/`
+        this.getCurrentArtistUrl = `${this.baseUrl}/view/currentArtist/`
         this.myPlaylistUrl = `${this.baseUrl}/view/myPlaylist/`
     }
 
@@ -62,5 +63,9 @@ export default class AuthenticationService {
 
     deleteSong(userId, name) {
         return get(this.myPlaylistUrl + userId + '/' + name)
+    }
+
+    getCurrentArtist(artistId) { 
+        return get(this.getCurrentArtistUrl + artistId)
     }
 }

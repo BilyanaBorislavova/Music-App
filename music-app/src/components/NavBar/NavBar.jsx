@@ -74,7 +74,7 @@ const NavBar = props => {
               <NavLink to="/createSong" activeClassName="active">
                 Add Song
               </NavLink>
-            </li>
+            </li> 
             <li>
               <NavLink to="/banUsers" activeClassName="active">
                 Ban Users

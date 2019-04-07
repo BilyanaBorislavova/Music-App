@@ -18,6 +18,7 @@ import "./App.css";
 import ViewArtists from "./components/User/ViewArtists";
 import ViewSongs from "./components/User/ViewSongs";
 import MyPlaylist from "./components/User/MyPlaylist";
+import { isError } from "util";
 
 class App extends Component {
   constructor(props) {
@@ -60,8 +61,8 @@ class App extends Component {
                 <Admin path="/createArtist" exact component={Artist} isLoggedIn={user.isLoggedIn} isAdmin={user.isAdmin}/>
                 <Admin path="/createSong" exact component={Song} isLoggedIn={user.isLoggedIn} isAdmin={user.isAdmin}/>
                 <Admin path="/banUsers" exact component={BanUsers} isLoggedIn={user.isLoggedIn} isAdmin={user.isAdmin}/>
-                <AdminAndUser path="/profile" exact component={ProfileContext} isLoggedIn={user.isLoggedIn} isAdmin={user.isAdmin}/>
                 <User path="/viewArtists" exact component={ViewArtists} isLoggedIn={user.isLoggedIn} isAdmin={user.isAdmin}/>
+                <AdminAndUser path="/profile" exact component={ProfileContext} isLoggedIn={user.isLoggedIn} isAdmin={user.isAdmin}/>
                 <User path="/viewSongs" exact component={ViewSongs} isLoggedIn={user.isLoggedIn} isAdmin={user.isAdmin}/>
                 <User path="/myPlaylist" exact component={MyPlaylist} isLoggedIn={user.isLoggedIn} isAdmin={user.isAdmin}/>
                 <AdminAndUser path="/logout" isLoggedIn={user.isLoggedIn} isAdmin={user.isAdmin}/>
